@@ -114,6 +114,9 @@
     <span class="button" onclick="window.location.href='/cv'">CV</span><br>
     <span class="button" onclick="window.location.href='/game'">the_game</span><br>
     <span class="button" onclick="window.location.href='/cat'">my_cat</span><br><br>
+    {% if user.is_authenticated %}
+      <span class="button" onclick="window.location.href='/rodovoe_derevo_budget'">Rodovoe Derevo</span><br><br>
+    {% endif %}
     <span {% if is_index %} style="display: none;" {% else %} {% endif %} class="button"
           onclick="window.location.href='/'"
           hidden>go_back
