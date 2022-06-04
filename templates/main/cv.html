@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% if cv.is_html %}
+ {% autoescape off %}
+    {{ cv.cv_text }}
+ {% endautoescape %}
+{% else %}
+    <div class="frame-div-cv">
+        <pre>{{ cv.cv_text }}</pre>
+    </div>
+{% endif %}
+
+
+{% endblock %}
