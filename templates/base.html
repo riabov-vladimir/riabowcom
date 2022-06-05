@@ -81,6 +81,15 @@
         width: 400px;
         height: 200px;
       }
+      .frame-div-budget {
+        font-family: "pixel";
+        font-size: medium;
+        margin: -400px 1px 100px 401px;
+        padding: 30px 30px 30px 30px;
+        border: 3px dashed #1DFF22;
+        text-align: left;
+        font-size: 60%;
+      }
 
       .frame-div-cv {
 <!--        margin: -335px 1px 1px 401px;-->
@@ -115,7 +124,7 @@
     <span class="button" onclick="window.location.href='/game'">the_game</span><br>
     <span class="button" onclick="window.location.href='/cat'">my_cat</span><br><br>
     {% if user.is_authenticated %}
-      <span class="button" onclick="window.location.href='/rodovoe_derevo_budget'">Rodovoe Derevo</span><br><br>
+      <span class="button" onclick="window.location.href='/budgetreport/summary'" style="font-size: xx-large">rodovoe_derevo</span><br><br>
     {% endif %}
     <span {% if is_index %} style="display: none;" {% else %} {% endif %} class="button"
           onclick="window.location.href='/'"
@@ -123,5 +132,6 @@
     </span>
   </div>
 	{% block content %}{% endblock %}
+
   </body>
 </html>

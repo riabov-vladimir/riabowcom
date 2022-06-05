@@ -1,10 +1,122 @@
 {% extends "base.html" %}
 
 {% block content %}
+  <style type="text/css">
+   TABLE {
+    border-collapse: collapse; /* Убираем двойные линии между ячейками */
 
-<div class="frame-div-cv">
-    Бюджеты тут
+   }
+   TD, TH {
+    padding: 10px; /* Поля вокруг содержимого таблицы */
+    border: 2px solid green; /* Параметры рамки */
+   }
+   TH {
+    font-size: large;
+    background: #1DFF22;
+    color: #000;
+   }
+    .accordion {
+      background-color: #1DFF22;
+      color: #444;
+      cursor: pointer;
+      padding: 18px;
+      width: 100%;
+      border: none;
+      text-align: left;
+      outline: none;
+      font-size: 15px;
+      transition: 0.4s;
+    }
+
+    .active, .accordion:hover {
+      background-color: #1DFF22;
+    }
+
+    .accordion:after {
+      content: '\002B';
+      color: #1DFF22;
+      font-weight: bold;
+      float: right;
+      margin-left: 5px;
+    }
+
+    .active:after {
+      content: "\2212";
+    }
+
+    .panel {
+      padding: 0 18px;
+      background-color: black;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.2s ease-out;
+    }
+  </style>
+<div style="
+<!--    padding: 100px;-->
+<!--    margin: -400px 1px 100px 401px;-->
+    padding: 30px 300px 30px 300px;
+    font-family: pixel;
+">
+    <button class="accordion">ДРУГИЕ РАСХОДЫ</button>
+    <div class="panel">
+     <table>
+      <tr>
+        <th>Статья расходов</th>
+        <th>Сумма</th>
+      </tr>
+    {% for additional_expence in additional_expences %}
+      <tr>
+        <td>{{ additional_expence.expense_purpose }}</td>
+        <td>{{ additional_expence.expense_value }} руб.</td>
+      </tr>
+    {% endfor %}
+    </table>
+    </div>
+
+    <button class="accordion">СОТРУДНИКИ</button>
+    <div class="panel">
+     <table>
+      <tr>
+        <th>Ф.И.О.</th>
+        <th>Должность</th>
+        <th>Ставка</th>
+        <th>Ставка со скидкой</th>
+      </tr>
+    {% for employee in employees %}
+      <tr>
+        <td>{{ employee.name }}</td>
+        <td>{{ employee.position }}</td>
+        <td>{{ employee.position.cost }} руб.</td>
+        <td>{{ employee.position.cost_discount }} руб.</td>
+      </tr>
+    {% endfor %}
+    </table>
+    <br>
+    </div>
+
+    <button class="accordion">Section 3</button>
+    <div class="panel">
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+    </div>
 </div>
 
+  <script>
+var acc = document.getElementsByClassName("accordion");
+var i;
 
+for (i = 0; i < acc.length; i++) {
+  acc[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var panel = this.nextElementSibling;
+    if (panel.style.maxHeight) {
+      panel.style.maxHeight = null;
+    } else {
+      panel.style.maxHeight = panel.scrollHeight + "px";
+    }
+  });
+}
+</script>
 {% endblock %}
+
+

@@ -1,3 +1,27 @@
 from django.contrib import admin
+from .models import *
 
-# Register your models here.
+
+@admin.register(Employee)
+class EmployeeAdmin(admin.ModelAdmin):
+    pass
+
+
+@admin.register(EmployeePosition)
+class EmployeePositionAdmin(admin.ModelAdmin):
+    pass
+
+
+@admin.register(EmployeeHours)
+class EmployeeHoursAdmin(admin.ModelAdmin):
+    pass
+
+
+@admin.register(AdditionalExpences)
+class AdditionalExpencesAdmin(admin.ModelAdmin):
+    pass
+
+
+@admin.register(CurrentRdTeam)
+class CurrentRdTeamAdmin(admin.ModelAdmin):
+    pass

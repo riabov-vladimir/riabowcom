@@ -19,7 +19,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'main',
     'budgetreport',
-    'game'
+    'game',
+    'django_tables2'
 ]
 
 MIDDLEWARE = [

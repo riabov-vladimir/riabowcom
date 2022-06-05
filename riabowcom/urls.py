@@ -21,6 +21,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('main.urls')),
     path('game/', include('game.urls')),
-    # url(r'^accounts/auth/$', 'auth_view'),
-    path('', include('django.contrib.auth.urls'))
+    path('', include('django.contrib.auth.urls')),
+    path('budgetreport/', include('budgetreport.urls'))
 ]
