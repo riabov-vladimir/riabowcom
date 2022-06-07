@@ -17,7 +17,7 @@ class EmployeeHoursAdmin(admin.ModelAdmin):
     pass
 
 
-@admin.register(AdditionalExpences)
+@admin.register(AdditionalExpenses)
 class AdditionalExpencesAdmin(admin.ModelAdmin):
     pass
 

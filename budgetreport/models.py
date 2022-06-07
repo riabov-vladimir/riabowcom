@@ -30,7 +30,7 @@ class Employee(models.Model):
         ordering = ['position']
 
 
-class AdditionalExpences(models.Model):
+class AdditionalExpenses(models.Model):
     expense_purpose = models.CharField(max_length=100, blank=False, null=True, verbose_name='статья расходов')
     expense_value = models.IntegerField(blank=False, null=True, verbose_name='сумма')
     last_update = models.DateTimeField(auto_now=True)

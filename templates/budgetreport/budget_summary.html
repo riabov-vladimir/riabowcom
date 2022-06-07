@@ -69,6 +69,21 @@
     padding: 30px 300px 30px 300px;
     font-family: pixel;
 ">
+
+<!--    <form action="/add_expenses/" method="post">-->
+<!--        <label for="expense_purpose">expense_purpose: </label>-->
+<!--        <input id="expense_purpose" type="text" name="expense_purpose" >-->
+<!--        <label for="expense_value">expense_value: </label>-->
+<!--        <input id="expense_value" type="number" name="expense_value">-->
+<!--        <input class="button" type="submit" value="add">-->
+<!--    </form>-->
+
+    <form action="/budgetreport/summary/" method="post">
+        {% csrf_token %}
+        {{ form }}
+        <input type="submit" value="add">
+    </form>
+
     <button class="accordion">ДРУГИЕ РАСХОДЫ</button>
     <div class="panel">
      <table>
@@ -76,10 +91,10 @@
         <th>Статья расходов</th>
         <th>Сумма</th>
       </tr>
-    {% for additional_expence in additional_expences %}
+    {% for additional_expense in additional_expenses %}
       <tr>
-        <td>{{ additional_expence.expense_purpose }}</td>
-        <td>{{ additional_expence.expense_value }} руб.</td>
+        <td>{{ additional_expense.expense_purpose }}</td>
+        <td>{{ additional_expense.expense_value }} руб.</td>
       </tr>
     {% endfor %}
     </table>
