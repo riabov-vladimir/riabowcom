@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+      <form action="/budgetreport/employeehours/" method="post">
+        {% csrf_token %}
+        {{ form }}
+        <input type="submit" value="add">
+    </form>
+
+    <h2>Списанные часы</h2>
+    <ul>
+        {% for employee_hours in employee_hours_list %}
+            <li>{{ employee_hours_list }}</li>
+        {% endfor %}
+    </ul>
+{% endblock %}

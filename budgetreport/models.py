@@ -8,7 +8,7 @@ class EmployeePosition(models.Model):
     last_update = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.position
+        return f'{self.position} - {self.cost}'
 
     class Meta:
         verbose_name = 'компетенция'
