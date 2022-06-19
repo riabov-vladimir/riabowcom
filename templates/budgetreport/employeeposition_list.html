@@ -1,69 +1,6 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <style type="text/css">
-   TABLE {
-    border-collapse: collapse; /* Убираем двойные линии между ячейками */
-    margin: 25px; /* Отступы вокруг таблиц */
-
-   }
-   TD, TH {
-    padding: 10px; /* Поля вокруг содержимого таблицы */
-    border: 2px solid green; /* Параметры рамки */
-
-    font-size: medium;
-   }
-   TH {
-    font-size: large;
-    background: #1DFF22;
-    color: #000;
-   }
-    .accordion {
-      background-color: #1DFF22;
-      color: black;
-      cursor: pointer;
-      padding: 18px;
-      width: 100%;
-      border: none;
-      text-align: left;
-      outline: none;
-      font-size: x-large;
-      transition: 0.4s;
-    font-family: pixel;
-    }
-
-    .active, .accordion:hover {
-      background-color: #1DFF22;
-    font-family: pixel;
-    }
-
-    .accordion:after {
-      content: '\002B';
-      color: #1DFF22;
-      font-weight: bold;
-      float: left;
-      margin-left: 50px;
-    font-family: pixel;
-    }
-
-    .active:after {
-      content: "\2212";
-    font-family: pixel;
-    }
-
-    .panel {
-      padding: 0 18px;
-      background-color: black;
-      padding: 0px;
-      max-height: 0;
-
-      overflow: hidden;
-      border: 2px solid green; /* Параметры рамки */
-      transition: max-height 0.2s ease-out;
-    font-family: pixel;
-    }
-  </style>
-
 
 <div style="
 <!--    padding: 100px;-->
