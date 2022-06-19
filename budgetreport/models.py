@@ -64,6 +64,10 @@ class EmployeeHours(models.Model):
     def __str__(self):
         return f'{self.date_added} - {self.employee} - {self.task_description} - {self.hours} ч'
 
+    def hours_cost(self):
+        result = self.hours * self.employee.position.cost
+        return result
+
     class Meta:
         verbose_name = 'списанные часы'
         verbose_name_plural = 'списанные часы'

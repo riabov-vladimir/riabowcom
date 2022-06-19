@@ -63,37 +63,23 @@
     font-family: pixel;
     }
   </style>
+
+
 <div style="
 <!--    padding: 100px;-->
     margin: -400px 1px 100px 401px;
     padding: 30px 300px 30px 300px;
     font-family: pixel;
 ">
-
-
-
-    <button class="accordion">ДРУГИЕ РАСХОДЫ</button>
-    <div class="panel">
-
-    <form action="/budgetreport/summary/" method="post">
-        {% csrf_token %}
-        {{ form }}
-        <input type="submit" value="add">
-    </form>
-
-    <table>
-      <tr>
-        <th>Статья расходов</th>
-        <th>Сумма</th>
-      </tr>
-    {% for additional_expense in additional_expenses %}
-      <tr>
-        <td>{{ additional_expense.expense_purpose }}</td>
-        <td>{{ additional_expense.expense_value }} руб.</td>
-      </tr>
-    {% endfor %}
-    </table>
+    <div>
+        <ul>
+            <li><a href="/budgetreport/summary/">>>Итого за месяц</a></li>
+            <li><a href="/budgetreport/employeehours/">Часы и Задачи</a></li>
+            <li><a href="/budgetreport/employeepositionhours/">Суммы по должностям и Другие расходы</a></li>
+            <li><a href="/budgetreport/employeeposition/">Сотрудники и Ставки</a></li>
+        </ul>
     </div>
+
 
     <button class="accordion">СОТРУДНИКИ</button>
     <div class="panel">
@@ -114,11 +100,6 @@
     {% endfor %}
     </table>
     <br>
-    </div>
-
-    <button class="accordion">Section 3</button>
-    <div class="panel">
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
     </div>
 </div>
 

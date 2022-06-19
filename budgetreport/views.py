@@ -5,11 +5,13 @@ from .forms import AdditionalExpensesForm, EmployeeHoursForm
 from django.http import HttpResponseRedirect
 
 
-# Первый вариант реализации - все данные на одной вкладке
+# 1. Главная страница отчёта - общая информация с вкладки экселя "Счёт заказчику"
+#   + кнопки перехода на остальные вкладки
+#   GET (видимо придется делать функцию либо добавлять в контекст новую инфу)
+
 def budget_summary(request):
 	employees = Employee.objects.all().order_by('position')
 	positions = EmployeePosition.objects.all().order_by('position')
-	additional_expenses = AdditionalExpenses.objects.all().order_by('-expense_value')
 
 	if request.method == 'POST':
 
@@ -28,7 +30,6 @@ def budget_summary(request):
 	context = {
 		'employees': employees,
 		'positions': positions,
-		'additional_expenses': additional_expenses,
 		'form': form
 	}
 
@@ -36,11 +37,6 @@ def budget_summary(request):
 	              'budgetreport/budget_summary.html',
 	              context
 	              )
-
-
-# 1. Главная страница отчёта - общая информация с вкладки экселя "Счёт заказчику"
-#   + кнопки перехода на остальные вкладки
-#   GET (видимо придется делать функцию либо добавлять в контекст новую инфу)
 
 
 # 2. Вкладка "Списанные часы", в экселе вкладка называлась по имени месяца отчёта
@@ -82,6 +78,7 @@ def employee_hours_view(request):
 #   GET, POST
 def employee_position_hours_view(request):
 	employees = EmployeeHours.objects.all().order_by('-date_added')
+	additional_expenses = AdditionalExpenses.objects.all().order_by('-expense_value')
 
 	if request.method == 'POST':
 
@@ -91,28 +88,31 @@ def employee_position_hours_view(request):
 			additional_expenses_item = AdditionalExpenses(expense_purpose=form.cleaned_data['expense_purpose'],
 			                                              expense_value=form.cleaned_data['expense_value'])
 			additional_expenses_item.save()
-			return HttpResponseRedirect('/budgetreport/summary/')
+			return HttpResponseRedirect('/budgetreport/employeepositionhours/')
 
 	# if a GET (or any other method) we'll create a blank form
 	else:
 		form = AdditionalExpensesForm()
 
 	context = {
-		'employees': employees,
-		'positions': positions,
 		'additional_expenses': additional_expenses,
 		'form': form
 	}
 
 	return render(request,
-	              'budgetreport/budget_summary.html',
+	              'budgetreport/employee_position_hours.html',
 	              context
 	              )
 
 # 4. Вкладка "Ставки"
 #   GET - Готово
 # TODO Отрисовать таблицу в шаблоне, наполнить данными
+
+
 class EmployeePositionList(ListView):
 	model = EmployeePosition
+	extra_context = {
+		'employees': Employee.objects.all().order_by('position')
+	}
 
 

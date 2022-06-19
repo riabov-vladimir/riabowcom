@@ -75,52 +75,32 @@
         <ul>
             <li><a href="/budgetreport/summary/">Итого за месяц</a></li>
             <li><a href="/budgetreport/employeehours/">Часы и Задачи</a></li>
-            <li><a href="/budgetreport/employeepositionhours/">Суммы по должностям и Другие расходы</a></li>
-            <li><a href="/budgetreport/employeeposition/">>>Сотрудники и Ставки</a></li>
+            <li><a href="/budgetreport/employeepositionhours/">>>Суммы по должностям и Другие расходы</a></li>
+            <li><a href="/budgetreport/employeeposition/">Сотрудники и Ставки</a></li>
         </ul>
     </div>
-
-    <button class="accordion">СОТРУДНИКИ</button>
+    <div>
+    <form action="/budgetreport/summary/" method="post">
+        {% csrf_token %}
+        {{ form }}
+        <input type="submit" value="add">
+    </form>
+    </div>
+    <button class="accordion">ДРУГИЕ РАСХОДЫ</button>
     <div class="panel">
-     <table>
+    <table>
       <tr>
-        <th>Ф.И.О.</th>
-        <th>Должность</th>
-        <th>Ставка</th>
-        <th>Ставка со скидкой</th>
+        <th>Статья расходов</th>
+        <th>Сумма</th>
       </tr>
-    {% for employee in employees %}
+    {% for additional_expense in additional_expenses %}
       <tr>
-        <td>{{ employee.name }}</td>
-        <td>{{ employee.position.position }}</td>
-        <td>{{ employee.position.cost }} руб.</td>
-        <td>{{ employee.position.cost_discount }} руб.</td>
+        <td>{{ additional_expense.expense_purpose }}</td>
+        <td>{{ additional_expense.expense_value }} руб.</td>
       </tr>
     {% endfor %}
     </table>
-    <br>
     </div>
-
-    <button class="accordion">СТАВКИ</button>
-    <div class="panel">
-     <table>
-      <tr>
-        <th>Должность</th>
-        <th>Ставка</th>
-        <th>Ставка со скидкой</th>
-      </tr>
-    {% for position in object_list %}
-      <tr>
-        <td>{{ position.position }}</td>
-        <td>{{ position.cost }} руб.</td>
-        <td>{{ position.cost_discount }} руб.</td>
-      </tr>
-    {% endfor %}
-    </table>
-    <br>
-    </div>
-</div>
-
   <script>
 var acc = document.getElementsByClassName("accordion");
 var i;

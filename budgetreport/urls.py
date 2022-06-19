@@ -6,4 +6,5 @@ urlpatterns = [
     path('summary/', budget_summary, name='summary'),
     path('employeeposition/', EmployeePositionList.as_view(), name='employeeposition'),
     path('employeehours/', employee_hours_view, name='employeehours'),
+    path('employeepositionhours/', employee_position_hours_view, name='employeepositionhours')
 ]
