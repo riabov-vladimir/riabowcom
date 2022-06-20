@@ -79,15 +79,16 @@
             <li><a href="/budgetreport/employeeposition/">Сотрудники и Ставки</a></li>
         </ul>
     </div>
-    <div>
-    <form action="/budgetreport/summary/" method="post">
-        {% csrf_token %}
-        {{ form }}
-        <input type="submit" value="add">
-    </form>
-    </div>
+
     <button class="accordion">ДРУГИЕ РАСХОДЫ</button>
     <div class="panel">
+    <div style="padding: 30px">
+        <form action="/budgetreport/summary/" method="post">
+            {% csrf_token %}
+            {{ form }}
+            <input type="submit" value="add">
+        </form>
+    </div>
     <table>
       <tr>
         <th>Статья расходов</th>
