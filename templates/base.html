@@ -33,14 +33,12 @@
       .wrapper {
         margin: 90px auto;
         text-align: left;
-<!--        align-items: left;-->
         width: 100%;
         position: relative;
       }
       .button {
         padding: 5px 10px 1px 5px;
         margin: 10px 1px 2px 2px;
-<!--        color: #1DFF22;-->
         text-transform: uppercase;
         text-align: right;
         position: relative;
@@ -92,10 +90,7 @@
         text-align: left;
         font-size: 60%;
       }
-
       .frame-div-cv {
-<!--        margin: -335px 1px 1px 401px;-->
-<!--        padding: 20px 50px 200px 50px;-->
         width: 800px;
         margin: -335px 1px 1px 401px;
         padding: 25px 20px;
@@ -105,8 +100,6 @@
         letter-spacing: 3px;
         font-family: "pixel";
         font-size: 13px;
-<!--        width: 600px;-->
-<!--        height: 2000px;-->
       }
       .frame-div-cat {
         margin: -430px 1px 1px 250px;
@@ -118,83 +111,108 @@
         height: 800px;
       }
       TABLE {
-    border-collapse: collapse; /* Убираем двойные линии между ячейками */
-    margin: 25px; /* Отступы вокруг таблиц */
-
-   }
-   TD, TH {
-    padding: 10px; /* Поля вокруг содержимого таблицы */
-    border: 2px solid green; /* Параметры рамки */
-
-    font-size: medium;
-   }
-   TH {
-    font-size: large;
-    background: #1DFF22;
-    color: #000;
-   }
-    .accordion {
-      background-color: #1DFF22;
-      color: black;
-      cursor: pointer;
-      padding: 18px;
-      width: 100%;
-      border: none;
-      text-align: left;
-      outline: none;
-      font-size: x-large;
-      transition: 0.4s;
-    font-family: pixel;
-    }
-
-    .active, .accordion:hover {
-      background-color: #1DFF22;
-    font-family: pixel;
-    }
-
-    .accordion:after {
-      content: '\002B';
-      color: #1DFF22;
-      font-weight: bold;
-      float: left;
-      margin-left: 50px;
-    font-family: pixel;
-    }
-
-    .active:after {
-      content: "\2212";
-    font-family: pixel;
-    }
-
-    .panel {
-      padding: 0 18px;
-      background-color: black;
-      padding: 0px;
-      max-height: 0;
-
-      overflow: hidden;
-      border: 2px solid green; /* Параметры рамки */
-<!--      transition: max-height 0.2s ease-out;-->
-      font-family: pixel;
-    }
-    input {
-      display: block;
-      font-family: pixel;
-      font-size: 2rem;
-      line-height: 1.5;
-      color: #1DFF22;
-      background-color: #000;
-      background-clip: padding-box;
-      border: 1px solid #1DFF22;
-      transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-    }
-    input[type=text] {
-      width: 100%;
-      font-family: pixel;
-      padding: 20px 20px;
-      margin: 8px;
+        border-collapse: collapse; /* Убираем двойные линии между ячейками */
+        margin: 25px; /* Отступы вокруг таблиц */
       }
-    a {
+      TD, TH {
+        padding: 10px; /* Поля вокруг содержимого таблицы */
+        border: 2px solid green; /* Параметры рамки */
+        font-size: medium;
+      }
+      TH {
+        font-size: large;
+        background: #1DFF22;
+        color: #000;
+      }
+      .accordion {
+        background-color: #1DFF22;
+        color: black;
+        cursor: pointer;
+        padding: 18px;
+        width: 100%;
+        border: none;
+        text-align: left;
+        outline: none;
+        font-size: x-large;
+        transition: 0.4s;
+      font-family: pixel;
+      }
+
+      .active, .accordion:hover {
+        background-color: #1DFF22;
+      font-family: pixel;
+      }
+
+      .accordion:after {
+        content: '\002B';
+        color: #1DFF22;
+        font-weight: bold;
+        float: left;
+        margin-left: 50px;
+      font-family: pixel;
+      }
+
+      .active:after {
+        content: "\2212";
+      font-family: pixel;
+      }
+
+      .panel {
+        padding: 0 18px;
+        background-color: black;
+        padding: 0px;
+        max-height: 0;
+
+        overflow: hidden;
+        border: 2px solid green; /* Параметры рамки */
+      <!--      transition: max-height 0.2s ease-out;-->
+        font-family: pixel;
+      }
+      input {
+        display: block;
+        font-family: pixel;
+        font-size: 2rem;
+        line-height: 1.5;
+        color: #1DFF22;
+        background-color: #000;
+        background-clip: padding-box;
+        border: 1px solid #1DFF22;
+        transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+      }
+      input[type=text] {
+        width: 100%;
+        font-family: pixel;
+        padding: 20px 20px;
+        margin: 8px;
+      }
+      input[type=text]:focus {
+        width: 100%;
+        border: 5px solid #1DFF22;
+        outline: none;
+        background-color: #054201;
+        font-family: pixel;
+        padding: 20px 20px;
+        margin: 8px;
+      }
+      input[type=number] {
+        width: 22%;
+        font-family: pixel;
+        padding: 20px 20px;
+        margin: 8px;
+      }
+      input[type=number]:focus {
+        width: 22%;
+        font-family: pixel;
+        padding: 20px 20px;
+        margin: 8px;
+        outline: none;
+        background-color: #054201;
+        border: 5px solid #1DFF22;
+      }
+      input[type=number]::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+      }
+      a {
         color: #1DFF22;
       }
       a:link {
@@ -204,13 +222,32 @@
         color: #1DFF22;
       }
       a:focus {
-        color: #1DFF22;
+        color: #05c609;
       }
       a:hover {
-        color: #1DFF22;
+        color: #05c609;
       }
       a:active {
         color: #1DFF22;
+      }
+      ::selection {
+        color: black;
+        background: #1DFF22;
+      }
+      select {
+        display: block;
+        font-family: pixel;
+        font-size: 2rem;
+        color: #1DFF22;
+        background-color: #000;
+        background-clip: padding-box;
+        border: 1px solid #1DFF22;
+        transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+        color: black;
+        background: #1DFF22;
+      }
+      select:focus {
+        outline: none;
       }
     </style>
   </head>

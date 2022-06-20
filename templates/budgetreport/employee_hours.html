@@ -14,7 +14,6 @@
             <li><a href="/budgetreport/employeepositionhours/">Суммы по должностям и Другие расходы</a></li>
             <li><a href="/budgetreport/employeeposition/">Сотрудники и Ставки</a></li>
         </ul>
-    </div>
 
     <form action="/budgetreport/employeehours/" method="post">
         {% csrf_token %}
@@ -45,4 +44,5 @@
       </tr>
     {% endfor %}
     </table>
+    </div>
 {% endblock %}

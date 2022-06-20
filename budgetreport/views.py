@@ -77,7 +77,6 @@ def employee_hours_view(request):
 # 3. Вкладка "Работа по должностям"
 #   GET, POST
 def employee_position_hours_view(request):
-    employees = EmployeeHours.objects.all().order_by('-date_added')
     additional_expenses = AdditionalExpenses.objects.all().order_by('-expense_value')
 
     if request.method == 'POST':
