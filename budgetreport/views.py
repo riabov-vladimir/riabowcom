@@ -88,7 +88,6 @@ def employee_position_hours_view(request):
                                                           expense_value=form.cleaned_data['expense_value'])
             additional_expenses_item.save()
             return HttpResponseRedirect('/budgetreport/employeepositionhours/')
-
     # if a GET (or any other method) we'll create a blank form
     else:
         form = AdditionalExpensesForm()

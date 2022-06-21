@@ -83,7 +83,7 @@
     <button class="accordion">ДРУГИЕ РАСХОДЫ</button>
     <div class="panel">
     <div style="padding: 30px">
-        <form action="/budgetreport/summary/" method="post">
+        <form action="/budgetreport/employeepositionhours/" method="post">
             {% csrf_token %}
             {{ form }}
             <input type="submit" value="add">
