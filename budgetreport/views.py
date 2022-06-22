@@ -3,6 +3,7 @@ from django.views.generic import ListView
 from budgetreport.models import *
 from .forms import AdditionalExpensesForm, EmployeeHoursForm
 from django.http import HttpResponseRedirect
+from django.db.models import Sum
 
 
 # 1. Главная страница отчёта - общая информация с вкладки экселя "Счёт заказчику"
@@ -10,8 +11,16 @@ from django.http import HttpResponseRedirect
 #   GET (видимо придется делать функцию либо добавлять в контекст новую инфу)
 
 def budget_summary(request):
-    employees = Employee.objects.all().order_by('position')
-    positions = EmployeePosition.objects.all().order_by('position')
+    employee_hours = EmployeeHours.objects.all()
+    additional_expenses = AdditionalExpenses.objects.all().aggregate(Sum('expense_value'))
+
+    total_cost = 0
+
+    for x in employee_hours:
+        total_cost += int(x.hours_cost())
+# ------------------------------------------------------------------------------ check
+    total_cost += additional_expenses.get('expense_value__sum')
+
 
     if request.method == 'POST':
 
@@ -28,8 +37,7 @@ def budget_summary(request):
         form = AdditionalExpensesForm()
 
     context = {
-        'employees': employees,
-        'positions': positions,
+        'total_cost': total_cost,
         'form': form
     }
 

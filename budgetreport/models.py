@@ -66,7 +66,7 @@ class EmployeeHours(models.Model):
 
     def hours_cost(self):
         result = self.hours * self.employee.position.cost
-        return result
+        return str(result)
 
     class Meta:
         verbose_name = 'списанные часы'

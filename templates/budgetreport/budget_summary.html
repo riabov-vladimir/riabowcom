@@ -75,27 +75,12 @@
         </ul>
     </div>
 
+    Затраты по проекту: {{ total_cost }} рублей <br>
+      Месяц: Июнь 2022 года<br>
+    Менеджер: Данила Мизенко<br>
+      $КИДКА: <br>
+      К оплате: {{ total_cost }} рублей
 
-    <button class="accordion">СОТРУДНИКИ</button>
-    <div class="panel">
-     <table>
-      <tr>
-        <th>Ф.И.О.</th>
-        <th>Должность</th>
-        <th>Ставка</th>
-        <th>Ставка со скидкой</th>
-      </tr>
-    {% for employee in employees %}
-      <tr>
-        <td>{{ employee.name }}</td>
-        <td>{{ employee.position }}</td>
-        <td>{{ employee.position.cost }} руб.</td>
-        <td>{{ employee.position.cost_discount }} руб.</td>
-      </tr>
-    {% endfor %}
-    </table>
-    <br>
-    </div>
 </div>
 
   <script>
