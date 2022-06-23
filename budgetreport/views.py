@@ -3,7 +3,7 @@ from django.views.generic import ListView
 from budgetreport.models import *
 from .forms import AdditionalExpensesForm, EmployeeHoursForm
 from django.http import HttpResponseRedirect
-from django.db.models import Sum
+from django.db.models import Sum, Model, PositiveIntegerField
 
 
 # 1. Главная страница отчёта - общая информация с вкладки экселя "Счёт заказчику"
@@ -72,7 +72,21 @@ def employee_hours_view(request):
 # 3. Вкладка "Работа по должностям"
 #   GET, POST
 def employee_position_hours_view(request):
+    """
+    SELECT
+        eh.employee,
+        ep.position,
+        SUM(eh.hours),
+        SUM(ep.cost)
+    FROM EmployeeHours eh
+        LEFT JOIN Employee e ON eh.employee = e.pk
+        LEFT JOIN EmployeePosition ep ON e.position = ep.pk
+    GROUP BY eh.employee, ep.position
+
+    """
     additional_expenses = AdditionalExpenses.objects.all().order_by('-expense_value')
+    position_hours = EmployeeHours.objects.values('employee__name', 'employee__position__position').order_by(
+        'employee').annotate(total_hours=Sum('hours', output_field=PositiveIntegerField))
 
     if request.method == 'POST':
 
@@ -88,6 +102,7 @@ def employee_position_hours_view(request):
         form = AdditionalExpensesForm()
 
     context = {
+        'position_hours': position_hours,
         'additional_expenses': additional_expenses,
         'form': form
     }

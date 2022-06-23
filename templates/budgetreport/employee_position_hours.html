@@ -9,6 +9,24 @@
             <li><a href="/budgetreport/employeeposition/">Сотрудники и Ставки</a></li>
         </ul>
     </div>
+    <p>{{ position_hours }}</p>
+    <table>
+        <tr>
+            <th>Сотрудник</th>
+            <th>Должность</th>
+            <th>Всего часов</th>
+            <th>Сумма</th>
+        </tr>
+        {% for position_hours_item in position_hours %}
+        <tr>
+            <td>{{ position_hours_item.employee__name }}</td>
+            <td>{{ position_hours_item.employee__position__position }} </td>
+            <td>{{ position_hours_item.total_hours }} </td>
+            <td>{{ position_hours_item.employee }} руб.</td>
+        </tr>
+        {% endfor %}
+    </table>
+
 
     <button class="accordion">ДРУГИЕ РАСХОДЫ</button>
     <div class="panel">
