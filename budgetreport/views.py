@@ -14,31 +14,18 @@ def budget_summary(request):
     employee_hours = EmployeeHours.objects.all()
     additional_expenses = AdditionalExpenses.objects.all().aggregate(Sum('expense_value'))
 
-    total_cost = 0
+    total_hours_cost = 0
+    total_hours_cost_discount = 0
 
     for x in employee_hours:
-        total_cost += int(x.hours_cost())
-# ------------------------------------------------------------------------------ check
-    total_cost += additional_expenses.get('expense_value__sum')
+        total_hours_cost += int(x.hours_cost())
+    total_hours_cost += additional_expenses.get('expense_value__sum')
 
-
-    if request.method == 'POST':
-
-        form = AdditionalExpensesForm(request.POST)
-
-        if form.is_valid():
-            additional_expenses_item = AdditionalExpenses(expense_purpose=form.cleaned_data['expense_purpose'],
-                                                          expense_value=form.cleaned_data['expense_value'])
-            additional_expenses_item.save()
-            return HttpResponseRedirect('/budgetreport/summary/')
-
-    # if a GET (or any other method) we'll create a blank form
-    else:
-        form = AdditionalExpensesForm()
+    overall_cost = 0
 
     context = {
-        'total_cost': total_cost,
-        'form': form
+        'total_hours_cost': total_hours_cost,
+
     }
 
     return render(request,

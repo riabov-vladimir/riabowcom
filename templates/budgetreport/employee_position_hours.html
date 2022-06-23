@@ -1,71 +1,6 @@
-{% extends "base.html" %}
+{% extends "base.html" %} {% block content %}
 
-{% block content %}
-  <style type="text/css">
-   TABLE {
-    border-collapse: collapse; /* Убираем двойные линии между ячейками */
-    margin: 25px; /* Отступы вокруг таблиц */
-
-   }
-   TD, TH {
-    padding: 10px; /* Поля вокруг содержимого таблицы */
-    border: 2px solid green; /* Параметры рамки */
-
-    font-size: medium;
-   }
-   TH {
-    font-size: large;
-    background: #1DFF22;
-    color: #000;
-   }
-    .accordion {
-      background-color: #1DFF22;
-      color: black;
-      cursor: pointer;
-      padding: 18px;
-      width: 100%;
-      border: none;
-      text-align: left;
-      outline: none;
-      font-size: x-large;
-      transition: 0.4s;
-    font-family: pixel;
-    }
-
-    .active, .accordion:hover {
-      background-color: #1DFF22;
-    font-family: pixel;
-    }
-
-    .accordion:after {
-      content: '\002B';
-      color: #1DFF22;
-      font-weight: bold;
-      float: left;
-      margin-left: 50px;
-    font-family: pixel;
-    }
-
-    .active:after {
-      content: "\2212";
-    font-family: pixel;
-    }
-
-    .panel {
-      padding: 0 18px;
-      background-color: black;
-      padding: 0px;
-      max-height: 0;
-
-      overflow: hidden;
-      border: 2px solid green; /* Параметры рамки */
-      transition: max-height 0.2s ease-out;
-    font-family: pixel;
-    }
-  </style>
-
-
-  <div class="frame-div-budget-tab">
+<div class="frame-div-budget-tab">
     <div>
         <ul>
             <li><a href="/budgetreport/summary/">Итого за месяц</a></li>
@@ -77,42 +12,39 @@
 
     <button class="accordion">ДРУГИЕ РАСХОДЫ</button>
     <div class="panel">
-    <div style="padding: 30px">
-        <form action="/budgetreport/employeepositionhours/" method="post">
-            {% csrf_token %}
-            {{ form }}
-            <input type="submit" value="add">
-        </form>
+        <div style="padding: 30px">
+            <form action="/budgetreport/employeepositionhours/" method="post">
+                {% csrf_token %} {{ form }}
+                <input type="submit" value="add">
+            </form>
+        </div>
+        <table>
+            <tr>
+                <th>Статья расходов</th>
+                <th>Сумма</th>
+            </tr>
+            {% for additional_expense in additional_expenses %}
+            <tr>
+                <td>{{ additional_expense.expense_purpose }}</td>
+                <td>{{ additional_expense.expense_value }} руб.</td>
+            </tr>
+            {% endfor %}
+        </table>
     </div>
-    <table>
-      <tr>
-        <th>Статья расходов</th>
-        <th>Сумма</th>
-      </tr>
-    {% for additional_expense in additional_expenses %}
-      <tr>
-        <td>{{ additional_expense.expense_purpose }}</td>
-        <td>{{ additional_expense.expense_value }} руб.</td>
-      </tr>
-    {% endfor %}
-    </table>
-    </div>
-  <script>
-var acc = document.getElementsByClassName("accordion");
-var i;
+    <script>
+        var acc = document.getElementsByClassName("accordion");
+        var i;
 
-for (i = 0; i < acc.length; i++) {
-  acc[i].addEventListener("click", function() {
-    this.classList.toggle("active");
-    var panel = this.nextElementSibling;
-    if (panel.style.maxHeight) {
-      panel.style.maxHeight = null;
-    } else {
-      panel.style.maxHeight = panel.scrollHeight + "px";
-    }
-  });
-}
-</script>
-{% endblock %}
-
-
+        for (i = 0; i < acc.length; i++) {
+            acc[i].addEventListener("click", function() {
+                this.classList.toggle("active");
+                var panel = this.nextElementSibling;
+                if (panel.style.maxHeight) {
+                    panel.style.maxHeight = null;
+                } else {
+                    panel.style.maxHeight = panel.scrollHeight + "px";
+                }
+            });
+        }
+    </script>
+    {% endblock %}
