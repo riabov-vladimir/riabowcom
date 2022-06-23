@@ -1,4 +1,5 @@
 {% extends "base.html" %} {% block content %}
+{% load mathfilters %}
 
 <div class="frame-div-budget-tab">
     <div>
@@ -22,7 +23,7 @@
             <td>{{ position_hours_item.employee__name }}</td>
             <td>{{ position_hours_item.employee__position__position }} </td>
             <td>{{ position_hours_item.total_hours }} </td>
-            <td>{{ position_hours_item.employee }} руб.</td>
+            <td>{{ position_hours_item.total_cost }} руб.</td>
         </tr>
         {% endfor %}
     </table>
