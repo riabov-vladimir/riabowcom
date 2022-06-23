@@ -85,7 +85,7 @@ def employee_position_hours_view(request):
 
     """
     additional_expenses = AdditionalExpenses.objects.all().order_by('-expense_value')
-    position_hours = EmployeeHours.objects.values('employee__name', 'employee__position__position').prefetch_related('position').annotate(total_hours=Sum('hours'), total_cost=Sum('hours') )
+    position_hours = EmployeeHours.objects.values('employee__name', 'employee__position__position', 'employee__position__cost').annotate(total_hours=Sum('hours'))
 
     if request.method == 'POST':
 

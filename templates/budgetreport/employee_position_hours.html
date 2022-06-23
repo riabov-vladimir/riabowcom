@@ -23,7 +23,7 @@
             <td>{{ position_hours_item.employee__name }}</td>
             <td>{{ position_hours_item.employee__position__position }} </td>
             <td>{{ position_hours_item.total_hours }} </td>
-            <td>{{ position_hours_item.total_cost }} руб.</td>
+            <td>{{ position_hours_item.employee__position__cost|mul:position_hours_item.total_hours }} руб.</td>
         </tr>
         {% endfor %}
     </table>
