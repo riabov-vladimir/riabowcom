@@ -274,3 +274,10 @@ body::-webkit-scrollbar-thumb {
     background-color: #054201;
     outline: 2px solid #1DFF22;
 }
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active{
+    -webkit-box-shadow: 0 0 0 300px #1ed422 inset !important;
+}
