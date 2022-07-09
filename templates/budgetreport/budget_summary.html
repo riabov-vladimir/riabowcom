@@ -11,24 +11,8 @@
     </div>
 
     <p>
-        Затраты по проекту: {{ total_hours_cost }} рублей <br> Месяц: Июнь 2022 года<br> Менеджер: Данила Мизенко<br> $КИДКА: <br> К оплате: {{ total_hours_cost }} рублей
+        Затраты по проекту: {{ total_hours_cost }} рублей <br> Месяц: Июнь 2022 года<br> Менеджер: {{ user.first_name }}
+        {{ user.last_name }} <br> $КИДКА: <br> К оплате: {{ total_hours_cost }} рублей
     </p>
 </div>
-
-<script>
-    var acc = document.getElementsByClassName("accordion");
-    var i;
-
-    for (i = 0; i < acc.length; i++) {
-        acc[i].addEventListener("click", function() {
-            this.classList.toggle("active");
-            var panel = this.nextElementSibling;
-            if (panel.style.maxHeight) {
-                panel.style.maxHeight = null;
-            } else {
-                panel.style.maxHeight = panel.scrollHeight + "px";
-            }
-        });
-    }
-</script>
 {% endblock %}

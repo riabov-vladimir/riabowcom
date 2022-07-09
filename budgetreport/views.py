@@ -1,31 +1,47 @@
+from django.contrib.auth.models import User
+from django.core.exceptions import PermissionDenied
 from django.shortcuts import render
 from django.views.generic import ListView
 from budgetreport.models import *
 from .forms import AdditionalExpensesForm, EmployeeHoursForm
 from django.http import HttpResponseRedirect
 from django.db.models import Sum, Model, PositiveIntegerField
+from django.views.decorators.http import require_safe
+from django.http import HttpResponse
 
 
 # 1. Главная страница отчёта - общая информация с вкладки экселя "Счёт заказчику"
-#   + кнопки перехода на остальные вкладки
-#   GET (видимо придется делать функцию либо добавлять в контекст новую инфу)
-
+@require_safe
 def budget_summary(request):
-    employee_hours = EmployeeHours.objects.all()
-    additional_expenses = AdditionalExpenses.objects.all().aggregate(Sum('expense_value'))
+    user_group = list(request.user.groups.values_list('name', flat=True))
+    if 'rd' not in user_group:
+        raise PermissionDenied
 
-    total_hours_cost = 0
-    total_hours_cost_discount = 0
+    # calculate full-price working hours cost
+    employee_hours = EmployeeHours.objects.filter(is_discount_hours=False).all()
+    employee_hours_cost = 0
+    for i in employee_hours:
+        employee_hours_cost += int(i.hours_cost())
 
-    for x in employee_hours:
-        total_hours_cost += int(x.hours_cost())
-    total_hours_cost += additional_expenses.get('expense_value__sum')
+    # calculate discounted working hours cost
+    employee_discount_hours = EmployeeHours.objects.filter(is_discount_hours=True).all()
+    employee_discount_hours_cost = 0
+    for i in employee_discount_hours:
+        employee_discount_hours_cost += int(i.discount_hours_cost())
 
-    overall_cost = 0
+    # calculate additional expenses total cost
+    additional_expenses = AdditionalExpenses.objects.all() \
+        .aggregate(Sum('expense_value')) \
+        .get('expense_value__sum')
+    if not additional_expenses:   # converts None to int for calculations
+        additional_expenses = 0
+
+    overall_cost = employee_discount_hours_cost + employee_hours_cost + additional_expenses
 
     context = {
-        'total_hours_cost': total_hours_cost,
-
+        'overall_cost': overall_cost,
+        'employee_hours_cost': employee_hours_cost,
+        'employee_discount_hours_cost': employee_discount_hours_cost
     }
 
     return render(request,
@@ -72,20 +88,10 @@ def employee_hours_view(request):
 # 3. Вкладка "Работа по должностям"
 #   GET, POST
 def employee_position_hours_view(request):
-    """
-    SELECT
-        eh.employee,
-        ep.position,
-        SUM(eh.hours),
-        SUM(ep.cost)
-    FROM EmployeeHours eh
-        LEFT JOIN Employee e ON eh.employee = e.pk
-        LEFT JOIN EmployeePosition ep ON e.position = ep.pk
-    GROUP BY eh.employee, ep.position
-
-    """
     additional_expenses = AdditionalExpenses.objects.all().order_by('-expense_value')
-    position_hours = EmployeeHours.objects.values('employee__name', 'employee__position__position', 'employee__position__cost').annotate(total_hours=Sum('hours'))
+    position_hours = EmployeeHours.objects.values('employee__name',
+                                                  'employee__position__position',
+                                                  'employee__position__cost').annotate(total_hours=Sum('hours'))
 
     if request.method == 'POST':
 
@@ -111,14 +117,12 @@ def employee_position_hours_view(request):
                   context
                   )
 
-# 4. Вкладка "Ставки"
-#   GET - Готово
 
+# 4. Вкладка "Ставки"
+#   GET
 
 class EmployeePositionList(ListView):
     model = EmployeePosition
     extra_context = {
         'employees': Employee.objects.all().order_by('position')
     }
-
-
