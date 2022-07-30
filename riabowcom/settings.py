@@ -19,6 +19,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'mathfilters',  # https://pypi.org/project/django-mathfilters/
+    'django_user_agents', # user-agents https://github.com/selwin/django-user_agents
     'main',
     'budgetreport',
     'game'
@@ -32,7 +33,15 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django_user_agents.middleware.UserAgentMiddleware'
 ]
+
+# CACHES = {
+#     'default': {
+#         'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+#         'LOCATION': '127.0.0.1:11211',
+#     }
+# }
 
 ROOT_URLCONF = 'riabowcom.urls'
 TEMPLATES_PATH = BASE_DIR / 'templates'
