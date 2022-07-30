@@ -1,10 +1,5 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
-    <title>RIABOW.com</title>
+{% extends "base.html" %} {% block content %}
+
     <style>
       body {
         background: #000;
@@ -190,15 +185,7 @@ p{
     border:1px solid #fff;
 }
     </style>
-  </head>
-  <body>
-  <h1><u>RIABOW.homespace</u></h1>
-    <div class="wrapper">
-      <span class="button" onclick="window.location.href='/cv'">CV</span><br>
-      <span class="button" onclick="window.location.href='/game'">the_game</span><br>
-      <span class="button" onclick="window.location.href='/cat'">my_cat</span><br><br>
-      <span class="button" onclick="window.location.href='/'">go_back</span>
-    </div>
+
 <div class="frame-div">
       <!-- 1st row verticaly centered text in the square columns -->
 
@@ -294,5 +281,7 @@ p{
       <span class="button" onclick="window.location.href='/game/5'" style="text-align: center;">>RESET<</span>
         <br><br><br><p>the_game&#8482;</p>
     </div>
-  </body>
-</html>
+
+
+
+{% endblock %}

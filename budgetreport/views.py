@@ -15,7 +15,7 @@ from django.http import HttpResponse
 def budget_summary(request):
     user_group = list(request.user.groups.values_list('name', flat=True))
     if 'rd' not in user_group:
-        raise PermissionDenied
+        return HttpResponseRedirect('/')
 
     # calculate full-price working hours cost
     employee_hours = EmployeeHours.objects.filter(is_discount_hours=False).all()

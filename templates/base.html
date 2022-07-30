@@ -5,10 +5,6 @@
 <html>
   <style>
     @font-face {
-      font-family: "pixel-caps";
-      src: url("{% static 'main/fonts/pixel.ttf' %}");
-    }
-    @font-face {
       font-family: "pixel";
       src: url("{% static 'main/fonts/pixel.ttf' %}");
     }
@@ -21,7 +17,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
-    <title>RIABOW.com</title>
+    <title>riabow.com</title>
   </head>
   <body>
 
@@ -33,12 +29,12 @@
 
 
   <h1><u>RIABOW.homespace</u></h1>
-  <div class="wrapper">
+  <div class="wrapper" style="font-family: VT323, pixel, monospace;">
     <span class="button" onclick="window.location.href='/cv'">CV</span><br>
     <span class="button" onclick="window.location.href='/game'">the_game</span><br>
     <span class="button" onclick="window.location.href='/cat'">my_cat</span><br><br>
     {% if user.is_authenticated %}
-      <span class="button" onclick="window.location.href='/budgetreport/summary'" style="font-size: xx-large">rodovoe_derevo</span><br><br>
+      <span class="button" onclick="window.location.href='/budgetreport/summary'" style="font-size: 2rem">rodovoe_derevo</span><br><br>
     {% endif %}
     <span {% if is_index %} style="display: none;" {% else %} {% endif %} class="button"
           onclick="window.location.href='/'"
