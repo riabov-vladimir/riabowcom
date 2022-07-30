@@ -20,7 +20,7 @@
 
     .adapt-flex {
         display: flex;
-        {% if not is_pc %}
+        {% if is_pc %}
             flex-direction: row;
         {% else %}
             flex-direction: column;
