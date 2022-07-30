@@ -1,27 +1,33 @@
 {% extends "base.html" %} {% block content %}
 
 <style>
-    .frame-div {
-        margin: -475px 1px 1px 401px;
-        padding: 20px 30px 220px 30px;
+    .frame-screen {
         border: 3px dashed #1DFF22;
         text-align: center;
         font-size: 60%;
         width: 400px;
-        height: 200px;
         font-family: VT323, pixel, monospace;
         display: flex;
         flex-direction: column;
         flex: 50px;
     }
+
     .game-row {
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
     }
 
-    .frame-div2 {
-        margin: 5px 1px 1px 401px;
+    .adapt-flex {
+        display: flex;
+        {% if not is_pc %}
+            flex-direction: row;
+        {% else %}
+            flex-direction: column;
+        {% endif %}
+    }
+
+    .frame-controls {
         padding: 20px 30px 250px 30px;
         border: 3px solid #1DFF22;
         text-align: center;
@@ -127,8 +133,8 @@
     }
 
 </style>
-
-<div class="frame-div">
+<div class="adapt-flex">
+<div class="frame-screen">
     <!-- 1st row verticaly centered text in the square columns -->
     <div class="game-row">
         <div class="square">
@@ -217,10 +223,10 @@
             </div>
         </div>
     </div>
-<!-- END OF LAYOUT, following juts for the demo -->
 </div>
-  </div>
-    <div class="frame-div2">
+<!-- END OF LAYOUT, following juts for the demo -->
+
+    <div class="frame-controls">
       <span id="left" class="button" onclick="window.location.href='/game/1'" style="text-align: left; ">LEFT &#8592;</span><br>
       <span id="right" class="button" onclick="window.location.href='/game/2'">&#8594; RIGHT</span><br>
       <span id="up" class="button" onclick="window.location.href='/game/3'" style="text-align: left;">UP &#8593; </span><br>
@@ -228,4 +234,5 @@
       <span id="reset" class="button" onclick="window.location.href='/game/5'" style="text-align: center;">>RESET<</span>
         <br><br><br><p>the_game&#8482;</p>
     </div>
+</div>
 {% endblock %}

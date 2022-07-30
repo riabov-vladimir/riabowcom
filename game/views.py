@@ -134,7 +134,7 @@ def game_index(request):
         'cell7': move.pattern[2][0],
         'cell8': move.pattern[2][1],
         'cell9': move.pattern[2][2],
-        'is_mobile': request.user_agent.is_mobile
+        'is_pc': request.user_agent.is_pc
     }
 
     return render(request,

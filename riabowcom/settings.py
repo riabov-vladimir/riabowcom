@@ -36,13 +36,6 @@ MIDDLEWARE = [
     'django_user_agents.middleware.UserAgentMiddleware'
 ]
 
-# CACHES = {
-#     'default': {
-#         'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
-#         'LOCATION': '127.0.0.1:11211',
-#     }
-# }
-
 ROOT_URLCONF = 'riabowcom.urls'
 TEMPLATES_PATH = BASE_DIR / 'templates'
 
