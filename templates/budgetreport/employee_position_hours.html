@@ -1,0 +1,68 @@
+{% extends "base.html" %} {% block content %}
+{% load mathfilters %}
+
+<div class="frame-div-budget-tab">
+    <div>
+        <ul>
+            <li><a href="/budgetreport/summary/">Итого за месяц</a></li>
+            <li><a href="/budgetreport/employeehours/">Часы и Задачи</a></li>
+            <li><a href="/budgetreport/employeepositionhours/">>>Суммы по должностям и Другие расходы</a></li>
+            <li><a href="/budgetreport/employeeposition/">Сотрудники и Ставки</a></li>
+        </ul>
+    </div>
+    <table>
+        <tr>
+            <th>Сотрудник</th>
+            <th>Должность</th>
+            <th>Всего часов</th>
+            <th>Сумма</th>
+        </tr>
+        {% for position_hours_item in position_hours %}
+        <tr>
+            <td>{{ position_hours_item.employee__name }}</td>
+            <td>{{ position_hours_item.employee__position__position }} </td>
+            <td>{{ position_hours_item.total_hours }} </td>
+            <td>{{ position_hours_item.employee__position__cost|mul:position_hours_item.total_hours }} руб.</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+
+    <button class="accordion" style="font-family: pixel, monospace;">ДРУГИЕ РАСХОДЫ</button>
+    <div class="panel">
+        <div style="padding: 30px">
+            <form action="/budgetreport/employeepositionhours/" method="post">
+                {% csrf_token %} {{ form }}
+                <input type="submit" value="add">
+            </form>
+        </div>
+        <table>
+            <tr>
+                <th>Статья расходов</th>
+                <th>Сумма</th>
+            </tr>
+            {% for additional_expense in additional_expenses %}
+            <tr>
+                <td>{{ additional_expense.expense_purpose }}</td>
+                <td>{{ additional_expense.expense_value }} руб.</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+    <script>
+        var acc = document.getElementsByClassName("accordion");
+        var i;
+
+        for (i = 0; i < acc.length; i++) {
+            acc[i].addEventListener("click", function() {
+                this.classList.toggle("active");
+                var panel = this.nextElementSibling;
+                if (panel.style.maxHeight) {
+                    panel.style.maxHeight = null;
+                } else {
+                    panel.style.maxHeight = panel.scrollHeight + "px";
+                }
+            });
+        }
+    </script>
+    {% endblock %}

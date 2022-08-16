@@ -1,0 +1,40 @@
+{% extends "base.html" %} {% block content %}
+
+<div class="frame-div-budget-tab">
+    <ul>
+        <li><a href="/budgetreport/summary/">Итого за месяц</a></li>
+        <li><a href="/budgetreport/employeehours/">>>Часы и Задачи</a></li>
+        <li><a href="/budgetreport/employeepositionhours/">Суммы по должностям и Другие расходы</a></li>
+        <li><a href="/budgetreport/employeeposition/">Сотрудники и Ставки</a></li>
+    </ul>
+
+    <form action="/budgetreport/employeehours/" method="post">
+        {% csrf_token %} {{ form }}
+        <input type="submit" value="add">
+    </form>
+
+    <table>
+        <tr>
+            <th>Сотрудник</th>
+            <th>Часы</th>
+            <th>Овертайм</th>
+            <th>Стоимость часов</th>
+            <th>Описание задачи</th>
+            <th>Номер задачи</th>
+            <th>Дата списания</th>
+        </tr>
+        {% for employee_hours in employee_hours_list %}
+        <tr>
+            <td>{{ employee_hours.employee.name }}</td>
+            <td>{{ employee_hours.hours }}</td>
+            <td>{{ employee_hours.overtime }}</td>
+            <td>{{ employee_hours.hours_cost }}</td>
+            <td>{{ employee_hours.task_description }}</td>
+            <td>{{ employee_hours.task_number }}</td>
+            <td>{{ employee_hours.date_added }}</td>
+
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends "base.html" %} {% block content %}
+
+<div class="frame-div-budget-tab">
+    <div>
+        <ul>
+            <li><a href="/budgetreport/summary/">>>Итого за месяц</a></li>
+            <li><a href="/budgetreport/employeehours/">Часы и Задачи</a></li>
+            <li><a href="/budgetreport/employeepositionhours/">Суммы по должностям и Другие расходы</a></li>
+            <li><a href="/budgetreport/employeeposition/">Сотрудники и Ставки</a></li>
+        </ul>
+    </div>
+
+    <p>
+        Затраты по проекту: {{ total_hours_cost }} рублей <br> Месяц: Июнь 2022 года<br> Менеджер: {{ user.first_name }}
+        {{ user.last_name }} <br> $КИДКА: <br> К оплате: {{ total_hours_cost }} рублей
+    </p>
+</div>
+{% endblock %}

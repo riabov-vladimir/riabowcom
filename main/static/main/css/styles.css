@@ -1,0 +1,278 @@
+body {
+  background: #000;
+  color: #1dff22;
+  font-size: 20px;
+  font-family: pixel, monospace;
+}
+
+h1 {
+  padding: 1px 1px 1px 1px;
+  text-align: right;
+  font-size: 6rem;
+  font-family: VT323, pixel, monospace;
+}
+
+.wrapper {
+  margin: 90px auto;
+  text-align: left;
+  width: 100%;
+  position: relative;
+  text-size: 5rem;
+}
+
+.button {
+  padding: 5px 10px 1px 5px;
+  margin: 10px 1px 2px 2px;
+  text-align: right;
+  position: relative;
+  width: 200px;
+  height: 50px;
+  text-decoration: none;
+  display: inline-block;
+  border: 3px solid;
+  font-size: 2rem;
+}
+
+.button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  -webkit-transform: scaleY(0.1);
+  transform: scaleY(0.1);
+  transition: all 0.4s;
+}
+
+.button:hover {
+  color: #000;
+}
+
+.button:hover::before {
+  opacity: 1;
+  background-color: #1dff22;
+  -webkit-transform: scaleY(1);
+  transform: scaleY(1);
+  transition: -webkit-transform 0.6s cubic-bezier(0.08, 0.35, 0.13, 1.02),
+    opacity 0.4s;
+  transition: transform 0.6s cubic-bezier(0.08, 0.35, 0.13, 1.02), opacity;
+}
+
+.frame-div-warning {
+  margin: -335px 1px 1px 401px;
+  padding: 20px 50px 10px 50px;
+  border: 3px dashed #1dff22;
+  text-align: center;
+  width: 400px;
+  height: 200px;
+}
+
+.frame-div-budget {
+  font-size: medium;
+  margin: -400px 1px 100px 401px;
+  padding: 30px 30px 30px 30px;
+  border: 3px dashed #1dff22;
+  text-align: left;
+}
+
+.frame-div-budget-tab {
+  margin: auto;
+  padding: 30px 300px 30px 300px;
+}
+
+.frame-div-cv {
+  width: 800px;
+  margin: -335px 1px 1px 401px;
+  padding: 25px 20px;
+  border: 3px dashed #1dff22;
+  text-align: left;
+  color: #1cd81c;
+  letter-spacing: 3px;
+}
+
+.frame-div-cat {
+  margin: -430px 1px 1px 250px;
+  padding: 20px 50px 10px 50px;
+  border: 3px dashed #1dff22;
+  text-align: center;
+  width: 700px;
+  height: 800px;
+}
+
+TABLE {
+  border-collapse: collapse;
+  /* Убираем двойные линии между ячейками */
+  margin: 25px;
+}
+
+TD,
+TH {
+  padding: 10px;
+  border: 2px solid green;
+}
+
+TH {
+  background: #1dff22;
+  color: #000;
+}
+
+.accordion {
+  background-color: #1dff22;
+  color: black;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  transition: 0.4s;
+  font-size: 2rem;
+}
+
+.active,
+.accordion:hover {
+  background-color: #1dff22;
+
+  font-style: pixel, monospace;
+}
+
+.accordion:after {
+  content: "\002B";
+  color: #1dff22;
+  font-weight: bold;
+  float: left;
+  margin-left: 50px;
+}
+
+.active:after {
+  content: "\2212";
+}
+
+.panel {
+  padding: 0 18px;
+  background-color: black;
+  padding: 0px;
+  max-height: 0;
+  overflow: hidden;
+  border: 2px solid green;
+}
+
+input {
+  display: block;
+  font-size: 2rem;
+  line-height: 1.5;
+  color: #1dff22;
+  background-color: #000;
+  background-clip: padding-box;
+  border: 1px solid #1dff22;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+input[type="text"] {
+  width: 100%;
+  padding: 20px 20px;
+  margin: 8px;
+}
+
+input[type="text"]:focus {
+  width: 100%;
+  border: 5px solid #1dff22;
+  outline: none;
+  background-color: #054201;
+  padding: 20px 20px;
+  margin: 8px;
+}
+
+input[type="number"] {
+  width: 22%;
+  padding: 20px 20px;
+  margin: 8px;
+}
+
+input[type="number"]:focus {
+  width: 22%;
+  padding: 20px 20px;
+  margin: 8px;
+  outline: none;
+  background-color: #054201;
+  border: 5px solid #1dff22;
+}
+
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+a {
+  color: #1dff22;
+}
+
+a:link {
+  color: #1dff22;
+}
+
+a:visited {
+  color: #1dff22;
+}
+
+a:focus {
+  color: #05c609;
+}
+
+a:hover {
+  color: #05c609;
+}
+
+a:active {
+  color: #1dff22;
+}
+
+::selection {
+  color: black;
+  background: #1dff22;
+}
+
+select {
+  display: block;
+  font-size: 2rem;
+  color: #1dff22;
+  background-color: #000;
+  background-clip: padding-box;
+  border: 1px solid #1dff22;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  color: black;
+  background: #1dff22;
+}
+
+select:focus {
+  outline: none;
+}
+
+body::-webkit-scrollbar {
+  width: 1em;
+  background-color: #000;
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: #054201;
+  outline: 2px solid #1dff22;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 300px #1ed422 inset !important;
+}
