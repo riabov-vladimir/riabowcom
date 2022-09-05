@@ -19,9 +19,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'mathfilters',  # https://pypi.org/project/django-mathfilters/
+    'django_crontab',  # https://pypi.org/project/django-crontab/
     'main',
     'budgetreport',
-    'game'
+    'game',
+    'background_tasks'
 ]
 
 MIDDLEWARE = [
@@ -136,3 +138,9 @@ LOGGING = {
         }
     }
 }
+
+# ----- django-crontab settings --------------------
+
+CRONJOBS = [
+    ('*/1 * * * *', 'background_tasks.cron.weather_task', '>> /home/riabow/crontab_journal.log')
+]
