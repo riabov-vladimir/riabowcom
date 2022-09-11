@@ -4,4 +4,4 @@ from .models import WeatherQuery
 
 @admin.register(WeatherQuery)
 class WeatherQueryAdmin(admin.ModelAdmin):
-    pass
+    readonly_fields = ('query_date',)

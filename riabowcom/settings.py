@@ -139,8 +139,9 @@ LOGGING = {
     }
 }
 
-# ----- django-crontab settings --------------------
-
+# ----------------- django-crontab settings ----------------------
+# !! log path parameter was an issue on VPS (jobs didn't work) !!
 CRONJOBS = [
-    ('*/1 * * * *', 'background_tasks.cron.weather_task', '>> /home/riabow/crontab_journal.log')
+    ('*/1 * * * *', 'background_tasks.cron.weather_task'),
+    ('*/1 * * * *', 'background_tasks.cron.pollution_task')
 ]
