@@ -7,16 +7,25 @@ from django.db import models
 @admin.register(WeatherQuery)
 class WeatherQueryAdmin(admin.ModelAdmin):
     readonly_fields = ('query_date',)
+    list_display = ('weather_query_id',
+                    'http_status_code',
+                    'weather_state',
+                    'temperature',
+                    'pressure',
+                    'humidity',
+                    'cloudiness',
+                    'wind_speed')  # tuple([f.name for f in WeatherQuery._meta.get_fields()]) = ALL FIELDS DISPLAYED
     formfield_overrides = {
-        models.CharField: {'widget': TextInput(attrs={'size':'100'})},
-        models.TextField: {'widget': Textarea(attrs={'rows':4, 'cols':40})},
+        models.CharField: {'widget': TextInput(attrs={'size': '100'})},
+        models.TextField: {'widget': Textarea(attrs={'rows': 4, 'cols': 40})},
     }
 
 
 @admin.register(PollutionQuery)
 class PollutionQueryAdmin(admin.ModelAdmin):
     readonly_fields = ('query_date',)
+    list_display = tuple([f.name for f in PollutionQuery._meta.get_fields()])
     formfield_overrides = {
-        models.CharField: {'widget': TextInput(attrs={'size':'100'})},
-        models.TextField: {'widget': Textarea(attrs={'rows':4, 'cols':40})}
+        models.CharField: {'widget': TextInput(attrs={'size': '100'})},
+        models.TextField: {'widget': Textarea(attrs={'rows': 4, 'cols': 40})}
     }
