@@ -39,15 +39,10 @@ def weather_task():
     try:
         weather_query.parse()
     except Exception as e:
-        with open('crontab_journal.txt', 'a', encoding='utf-8') as file:
-            file.write(f'task failed at {datetime.now()} with the following exception: {e} \n')
+        with open('crontab_journal.txt', 'a', encoding='utf-8') as file:  # logging (beta-version)
+            file.write(f'<<W>> weather_task failed at {datetime.now()} with the following exception: {e} \n')
 
     weather_query.save()
-
-    # -------------- check if task works ---------------------
-    # with open('crontab_journal.log', 'a', encoding='utf-8') as file:
-    #     file.write(f'task finish at {datetime.now()} \n')
-    # --------------------------------------------------------
 
 
 def pollution_task():
@@ -64,5 +59,9 @@ def pollution_task():
         http_status_code=query.status_code,
         http_status_reason=query.reason
     )
-    pollution_query.parse()
+    try:
+        pollution_query.parse()
+    except Exception as e:
+        with open('crontab_journal.txt', 'a', encoding='utf-8') as file:  # logging (beta-version)
+            file.write(f'<<P>> pollution_task failed at {datetime.now()} with the following exception: {e} \n')
     pollution_query.save()

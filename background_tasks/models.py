@@ -29,7 +29,7 @@ class WeatherQuery(models.Model):
     weather_state = models.CharField(max_length=50, null=True, verbose_name='Погода (кратко)')
     weather_description = models.CharField(max_length=200, null=True, verbose_name='Погода (подробно)')
     weather_icon = models.CharField(max_length=3, null=True,
-                                    verbose_name='Погода (код изображения)')  # graphic icon code: 2 digits = id, letter n\d = day\night
+                                    verbose_name='Погода (код изображения)')  # graphic icon code: 2 digits = id, letter d\n = day\night
     temperature = models.PositiveSmallIntegerField(null=True, verbose_name='Температура, С°')
     temp_min = models.PositiveSmallIntegerField(null=True, verbose_name='Минимальная температура, С°')
     temp_max = models.PositiveSmallIntegerField(null=True, verbose_name='Максимальная температура, С°')
@@ -137,7 +137,25 @@ class PollutionQuery(models.Model):
     components_nh3 = models.FloatField(null=True, verbose_name='Концентрация NH3, μg/m3')
 
     def parse(self):
-        pass
+        # Deserializing API raw data
+        data_json = json.loads(str(self.query_response_body_raw))
+        # Safely getting list and extracting object from it
+        if data_list := data_json.get('list'):
+            data_list = data_list.pop(0)
+        # Converting timestamp to python datetime object
+        self.calc_date = datetime.datetime.fromtimestamp(data_list.get('dt'), datetime.timezone.utc) if data_list.get('dt') else None
+        # Regular parsing
+        self.latitude = data_json.get('coord', {}).get('lat')
+        self.longitude = data_json.get('coord', {}).get('lon')
+        self.air_quality_index = data_list.get('main', {}).get('aqi')
+        self.components_co = data_list.get('components', {}).get('co')
+        self.components_no = data_list.get('components', {}).get('no')
+        self.components_no2 = data_list.get('components', {}).get('no2')
+        self.components_o3 = data_list.get('components', {}).get('o3')
+        self.components_so2 = data_list.get('components', {}).get('so2')
+        self.components_pm2_5 = data_list.get('components', {}).get('pm2_5')
+        self.components_pm10 = data_list.get('components', {}).get('pm10')
+        self.components_nh3 = data_list.get('components', {}).get('nh3')
 
     def __str__(self):
         return f'Pollution#{self.pk}@{str(self.query_date)[0:-16]}'
