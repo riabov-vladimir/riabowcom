@@ -24,7 +24,7 @@ class WeatherQuery(models.Model):
     city_id = models.IntegerField(null=True, verbose_name='Идентификатор города')
     city_name = models.CharField(max_length=200, null=True, verbose_name='Город')
     longitude = models.FloatField(null=True, verbose_name='Долгота')
-    lattitude = models.FloatField(null=True, verbose_name='Широта')
+    latitude = models.FloatField(null=True, verbose_name='Широта')
     # ------ weather ------- #
     weather_state = models.CharField(max_length=50, null=True, verbose_name='Погода (кратко)')
     weather_description = models.CharField(max_length=200, null=True, verbose_name='Погода (подробно)')
@@ -63,14 +63,14 @@ class WeatherQuery(models.Model):
         sunset = data.get('sys', {}).get('sunset')
         if sunset:
             self.sunset = datetime.datetime.fromtimestamp(sunset, datetime.timezone.utc)
-
+        # ---------- geopolitical -----------#
         self.country_code = data.get('sys', {}).get('country')
         self.timezone = data.get('timezone')
         self.city_id = data.get('id')
         self.city_name = data.get('name')
-        # ------ coord --------- #
+        # ------ coordinates --------- #
         self.longitude = data.get('coord', {}).get('lon')
-        self.lattitude = data.get('coord', {}).get('lat')
+        self.latitude = data.get('coord', {}).get('lat')
         # ------ weather summary ------- #
         self.weather_state = data.get('weather', {})[0].get('main')
         self.weather_description = data.get('weather', {})[0].get('description')
@@ -108,6 +108,12 @@ class PollutionQuery(models.Model):
     """
     API documentation https://openweathermap.org/api/air-pollution
     Data source - GET request to http://api.openweathermap.org/data/2.5/weather?id={apiKey}&units=metric&lang=ru
+    Air Quality Index. Possible values: 1, 2, 3, 4, 5.
+      Where 1 = Good,
+            2 = Fair,
+            3 = Moderate,
+            4 = Poor,
+            5 = Very Poor.
     """
     pollution_query_id = models.AutoField(primary_key=True, verbose_name='Идентификатор запроса')
     query_response_body_raw = models.CharField(blank=True, max_length=1000, verbose_name='Ответ на запрос')
@@ -116,8 +122,21 @@ class PollutionQuery(models.Model):
     query_date = models.DateTimeField(auto_now_add=True,
                                       verbose_name='Время и дата запроса')  # format = 2022-09-11 01:33:01.891463+00:00
 
+    # ------------------- parsed fields--------------------------- #
+    latitude = models.FloatField(null=True, verbose_name='Широта')
+    longitude = models.FloatField(null=True, verbose_name='Долгота')
+    air_quality_index = models.PositiveSmallIntegerField(null=True, verbose_name='Индекс качества воздуха')
+    calc_date = models.DateTimeField(null=True, verbose_name='Время и дата формирования данных')
+    components_co = models.FloatField(null=True, verbose_name='Концентрация CO, μg/m3')
+    components_no = models.FloatField(null=True, verbose_name='Концентрация NO, μg/m3')
+    components_no2 = models.FloatField(null=True, verbose_name='Концентрация NO2, μg/m3')
+    components_o3 = models.FloatField(null=True, verbose_name='Концентрация O3, μg/m3')
+    components_so2 = models.FloatField(null=True, verbose_name='Концентрация SO2, μg/m3')
+    components_pm2_5 = models.FloatField(null=True, verbose_name='Концентрация PM2.5, μg/m3')
+    components_pm10 = models.FloatField(null=True, verbose_name='Концентрация PM10, μg/m3')
+    components_nh3 = models.FloatField(null=True, verbose_name='Концентрация NH3, μg/m3')
+
     def parse(self):
-        # TODO: add fields and write a code that would fill them from raw data field
         pass
 
     def __str__(self):
