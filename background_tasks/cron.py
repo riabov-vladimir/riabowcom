@@ -1,6 +1,6 @@
 import requests
 from riabowcom.settings_local import WEATHER_API_KEY, CITY_ID, LON, LAT
-from background_tasks.models import WeatherQuery
+from background_tasks.models import WeatherQuery, PollutionQuery
 from datetime import datetime
 """
 Run this command to add all defined jobs from CRONJOBS to crontab (of the user which you are running this command with):
@@ -22,7 +22,7 @@ def weather_task():
     """
 
     # -------------- check if task works ---------------------
-    # with open('test_task.txt', 'a', encoding='utf-8') as file:
+    # with open('crontab_journal.log', 'a', encoding='utf-8') as file:
     #     file.write(f'task start at {datetime.now()} \n')
     # --------------------------------------------------------
 
@@ -36,7 +36,7 @@ def weather_task():
     weather_query.save()
 
     # -------------- check if task works ---------------------
-    # with open('test_task.txt', 'a', encoding='utf-8') as file:
+    # with open('crontab_journal.log', 'a', encoding='utf-8') as file:
     #     file.write(f'task finish at {datetime.now()} \n')
     # --------------------------------------------------------
 
@@ -49,3 +49,10 @@ def pollution_task():
     :return:
     """
     query = requests.get(f'http://api.openweathermap.org/data/2.5/air_pollution?lat={LAT}&lon={LON}&appid={WEATHER_API_KEY}')
+    pollution_query = PollutionQuery.objects.create(
+        query_response_body_raw=query.text,
+        http_status_code=query.status_code,
+        http_status_reason=query.reason
+    )
+    pollution_query.parse()
+    pollution_query.save()
