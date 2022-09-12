@@ -19,9 +19,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'mathfilters',  # https://pypi.org/project/django-mathfilters/
+    'django_crontab',  # https://pypi.org/project/django-crontab/
     'main',
     'budgetreport',
-    'game'
+    'game',
+    'background_tasks'
 ]
 
 MIDDLEWARE = [
@@ -91,12 +93,17 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+USE_TZ = True # "Use timezone"
 
-USE_I18N = True
+TIME_ZONE = 'Europe/Moscow' # https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
 
-USE_TZ = True
+USE_I18N = False  # "Use translation system"
 
+USE_L10N = True  # The locale formatting system
+
+# DATETIME_FORMAT = '%d-%m-%Y %H:%M'
+
+TIME_FORMAT = '%H:%M:%S'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
@@ -136,3 +143,10 @@ LOGGING = {
         }
     }
 }
+
+# ----------------- django-crontab settings ----------------------
+# !! log path parameter was an issue on VPS (jobs didn't work) !!
+CRONJOBS = [
+    ('*/1 * * * *', 'background_tasks.cron.weather_task'),  # every 1 minute (for development)
+    ('*/1 * * * *', 'background_tasks.cron.pollution_task')  # every 1 minute (for development)
+]

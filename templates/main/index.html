@@ -1,9 +1,22 @@
-{% extends "base.html" %} {% block content %}
-<div class="frame-div-warning">
-    <p>! riabow.com is under construction !</p>
-    <p>Click here to view some <a href="https://http.cat" style="color: green;">cat
-      photos</a></p>
-    <p>Today is {{ now }} </p>
-    <p>(c) Wolodia Riabow</p>
-</div>
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="wrapper-temp">
+    <div class="frame-div-warning">
+      <p>! riabow.com is under construction !</p>
+      <p>
+        Click here to view some <a href="https://http.cat" style="color: green;">cat photos</a>
+      </p>
+      <p>Today is {{ now }}</p>
+      <p>(c) Wolodia Riabow</p>
+    </div>
+    <div class="news-temp">
+      <h3>Comming soon:</h3>
+      <ol>
+        <li>Background tasks ARE already running on this particular server!! Weather and Air Pollution data is being gathered from OPENWEATHERMAP API. GUI comming next!!</li>
+        <li>A special FAUX-micro-financial reporting service is on its way</li>
+        <li>Aaaand the last but not the least: Contents major update! CV + site overview, maybe more. The hardest part to find a time for...you either code or doc!</li>
+      </ol>
+    </div>
+  </div>
 {% endblock %}
