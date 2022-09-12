@@ -29,6 +29,16 @@ h1 {
   padding: 10px;
 }
 
+.main_wrapper {
+  display: flex;
+  flex-direction: row;
+}
+
+.body-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
 .button {
   padding: 5px 10px 1px 5px;
   margin: 10px 1px 2px 2px;
@@ -68,6 +78,10 @@ h1 {
   transition: -webkit-transform 0.6s cubic-bezier(0.08, 0.35, 0.13, 1.02),
     opacity 0.4s;
   transition: transform 0.6s cubic-bezier(0.08, 0.35, 0.13, 1.02), opacity;
+}
+
+.login-button {
+  
 }
 
 .frame-div-warning {

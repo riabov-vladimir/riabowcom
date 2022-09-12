@@ -3,41 +3,47 @@
 <!DOCTYPE html>
 
 <html>
-  <style>
-    @font-face {
-      font-family: "pixel";
-      src: url("{% static 'main/fonts/pixel.ttf' %}");
-    }
-  </style>
+<style>
+  @font-face {
+    font-family: "pixel";
+    src: url("{% static 'main/fonts/pixel.ttf' %}");
+  }
+</style>
 
-  <head>
-    <link rel="stylesheet" href="{% static 'main/css/styles.css'%}" type="text/css">
-    <link rel="icon" href="{% static 'main/img/favicon.ico' %}" type="image/x-icon">
-    <link rel="shortcut icon" href="{% static 'main/img/favicon.ico' %}" type="image/x-icon">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
-    <title>riabow.com</title>
-  </head>
-  <body>
+<head>
+  <link rel="stylesheet" href="{% static 'main/css/styles.css'%}" type="text/css" />
+  <link rel="icon" href="{% static 'main/img/favicon.ico' %}" type="image/x-icon" />
+  <link rel="shortcut icon" href="{% static 'main/img/favicon.ico' %}" type="image/x-icon" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet" />
+  <title>riabow.com</title>
+</head>
 
-  {% if user.is_authenticated %}
-    <a href="{% url 'logout' %}">>Logout<</a>
-  {% else %}
-    <a href="{% url 'login' %}">>Login<</a>
-  {% endif %}
-
-
-  <h1><u>RIABOW.homespace</u></h1>
-  <div class="wrapper" style="font-family: VT323, pixel, monospace;">
-    <span class="button" onclick="window.location.href='/cv'">CV</span><br>
-    <span class="button" onclick="window.location.href='/game'">the_game</span><br>
-    <span class="button" onclick="window.location.href='/cat'">my_cat</span><br><br>
+<body>
+  <div class="login-button">
     {% if user.is_authenticated %}
-    <span class="button" onclick="window.location.href='/budgetreport/summary'" style="font-size: 2rem">rodovoe_derevo</span><br><br>
-    {% endif %}
-    <span {% if is_index %} style="display: none;" {% else %} {% endif %} class="button" onclick="window.location.href='/'" hidden>go_back</span>
+    <a href="{% url 'logout' %}">
+      <logout_< /a>
+        {% else %}
+        <a href="{% url 'login' %}">>login_</a>
+        {% endif %}
   </div>
-	{% block content %}{% endblock %}
-  </body>
+
+  <div class="body-wrapper">
+    <h1><u>RIABOW.homespace</u></h1>
+    <div class="main-wrapper">
+      <div class="wrapper" style="font-family: VT323, pixel, monospace">
+        <span class="button" onclick="window.location.href='/cv'">CV</span><br>
+        <span class="button" onclick="window.location.href='/game'">the_game</span><br>
+        <span class="button" onclick="window.location.href='/cat'">my_cat</span><br><br>
+        <!-- <span class="button"   {% if user.is_authenticated %}          {% endif %} onclick="window.location.href='/budgetreport/summary'" -->
+          style="font-size: 2rem">rodovoe_derevo</span><br><br>
+        <span class="button" onclick="window.location.href='/'" hidden>go_back</span>
+      </div>
+      <div class="content-block">{% block content %}{% endblock %}</div>
+    </div>
+    <div>
+</body>
+
 </html>
